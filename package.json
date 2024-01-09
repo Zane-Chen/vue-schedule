@@ -1,9 +1,9 @@
 {
-  "name": "schedule-vue",
-  "version": "1.0.4",
+  "name": "mzf-schedule",
+  "version": "1.0.6",
   "private": false,
   "packageManager": "pnpm@8.6.0",
-  "main": "dist/schedule-vue.mjs",
+  "main": "dist/mzf-schedule.mjs",
   "types": "dist/packages/index.d.ts",
   "scripts": {
     "build": "vite build  --config vite.config.docs.ts",

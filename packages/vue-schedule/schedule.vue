@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<Props>(), {
   afternoonText: '12:00 - 24:00',
   weeksText: () => ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
   placeholder: '可拖动鼠标选择时间段',
+  showResult: false,
 })
 const emits = defineEmits<{
   (e: 'update:value', value: string): void
@@ -28,6 +29,7 @@ interface Props {
   afternoonText?: string
   weeksText?: string[]
   placeholder?: string
+  showResult?: boolean
 }
 
 interface State {
@@ -220,7 +222,7 @@ const isEmpty = computed(() =>
     bg="dark:gray/10"
     select-none border="1px dark:gray/5" rounded-4px
   >
-    <div h-40px flex items-center px-20px border-b="1px dark:gray/10">
+    <div class="justify-between" h-40px flex items-center px-20px border-b="1px dark:gray/10">
       <div flex="~ gap3" text="12px">
         <div flex="~ gap2" items-center>
           <div h-6px w-20px rounded-2px bg-blue-500 />
@@ -232,6 +234,12 @@ const isEmpty = computed(() =>
           <div h-6px w-20px border="0.5px dark:gray/50" rounded-2px />
           <div>{{ unselectedText }}</div>
         </div>
+        <div flex="~ gap2" items-center>
+          <div text="gray">可拖动鼠标选择时间段</div>
+        </div>
+      </div>
+      <div v-show="!isEmpty" text="12px blue-500 hover:blue-500/80" cursor-pointer @click="handleClear">
+        清空
       </div>
     </div>
     <div>
@@ -290,18 +298,12 @@ const isEmpty = computed(() =>
               @click.prevent="item.selected = !item.selected"
             />
           </tr>
-          <tr>
+          <tr v-if="showResult">
             <td colspan="49" p-20px text="14px">
               <div v-if="isEmpty" text="center">
                 {{ placeholder }}
               </div>
               <div v-else>
-                <div flex justify-between>
-                  <div>已选时间段</div>
-                  <div text="blue-500 hover:blue-500/80" cursor-pointer @click="handleClear">
-                    清空
-                  </div>
-                </div>
                 <div pt-20px>
                   <div
                     v-for="(item, index) in Object.keys(getDates)"
