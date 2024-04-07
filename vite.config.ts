@@ -33,7 +33,9 @@ export default defineConfig({
 
     // https://github.com/antfu/unocss
     // see uno.config.ts for config
-    UnoCSS(),
+    UnoCSS({
+      mode: 'vue-scoped'
+    }),
     dts(),
   ],
   build: {

@@ -83,7 +83,7 @@ watch(() => props.value, () => {
     else if (value.value[s] === '1')
       td.value.flat()[s].selected = true
   }
-})
+}, { immediate: true })
 
 const getDates = computed(() => {
   const dates = {} as any
@@ -326,3 +326,7 @@ const isEmpty = computed(() =>
     </div>
   </div>
 </template>
+
+<style scoped>
+@import '@unocss/reset/tailwind.css'
+</style>
